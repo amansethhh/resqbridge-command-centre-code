@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn-compatible tokens (kept for ui/* components) */
+    --background: 210 40% 97%;
+    --foreground: 222 47% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 14%;
+    --primary: 217 91% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 222 47% 14%;
+    --muted: 214 32% 95%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 214 32% 93%;
+    --accent-foreground: 222 47% 14%;
+    --destructive: 0 78% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 30% 90%;
+    --input: 214 30% 90%;
+    --ring: 217 91% 55%;
+    --chart-1: 217 91% 55%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 189 94% 43%;
+    --chart-5: 0 78% 55%;
+    --radius: 0.9rem;
+    --font-heading: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* ResQBridge operational tokens */
+    --rb-bg: 212 44% 96%;
+    --rb-bg-grad-1: 214 50% 98%;
+    --rb-bg-grad-2: 210 40% 92%;
+    --rb-glass: 0 0% 100%;
+    --rb-glass-alpha: 0.62;
+    --rb-glass-border: 214 34% 89%;
+    --rb-glass-border-alpha: 0.85;
+    --rb-glass-highlight: 0 0% 100%;
+    --rb-shadow: 220 30% 50%;
+    --rb-navy: 222 47% 11%;
+    --rb-text: 222 40% 16%;
+    --rb-muted: 215 16% 47%;
+    --rb-primary: 217 91% 55%;
+    --rb-cyan: 189 94% 43%;
+    --rb-operational: 160 84% 39%;
+    --rb-warning: 38 95% 48%;
+    --rb-critical: 0 78% 55%;
+    --rb-info: 199 89% 48%;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
+    --card: 222 40% 11%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 40% 12%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 217 91% 62%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 222 30% 16%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 28% 17%;
+    --muted-foreground: 215 25% 65%;
+    --accent: 222 30% 18%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 22%;
+    --input: 222 30% 22%;
+    --ring: 217 91% 62%;
+    --chart-1: 217 91% 62%;
+    --chart-2: 160 70% 45%;
+    --chart-3: 38 95% 55%;
+    --chart-4: 189 90% 55%;
+    --chart-5: 0 72% 60%;
+
+    --rb-bg: 222 47% 7%;
+    --rb-bg-grad-1: 222 50% 9%;
+    --rb-bg-grad-2: 218 45% 14%;
+    --rb-glass: 222 40% 14%;
+    --rb-glass-alpha: 0.55;
+    --rb-glass-border: 217 33% 32%;
+    --rb-glass-border-alpha: 0.7;
+    --rb-glass-highlight: 0 0% 100%;
+    --rb-shadow: 222 60% 2%;
+    --rb-navy: 210 50% 96%;
+    --rb-text: 210 40% 96%;
+    --rb-muted: 215 25% 65%;
+    --rb-primary: 217 91% 62%;
+    --rb-cyan: 189 90% 55%;
+    --rb-operational: 160 70% 48%;
+    --rb-warning: 38 95% 55%;
+    --rb-critical: 0 72% 60%;
+    --rb-info: 199 89% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply text-foreground font-body;
+    background-color: hsl(var(--rb-bg));
+    background-image:
+      radial-gradient(1200px 700px at 12% -8%, hsl(var(--rb-bg-grad-1)) 0%, transparent 55%),
+      radial-gradient(1000px 600px at 100% 0%, hsl(var(--rb-bg-grad-2)) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: hsl(var(--rb-primary) / 0.25);
+  }
+}
+
+@layer components {
+  /* Frosted glassmorphism surface */
+  .glass {
+    background: hsl(var(--rb-glass) / var(--rb-glass-alpha));
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid hsl(var(--rb-glass-border) / var(--rb-glass-border-alpha));
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.55) inset,
+      0 10px 30px -12px hsl(var(--rb-shadow) / 0.28);
+  }
+
+  .dark .glass {
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.08) inset,
+      0 16px 40px -16px hsl(var(--rb-shadow) / 0.7);
+  }
+
+  /* Elevated glass for panels/cards */
+  .glass-elevated {
+    background: hsl(var(--rb-glass) / calc(var(--rb-glass-alpha) + 0.08));
+    backdrop-filter: blur(28px) saturate(150%);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    border: 1px solid hsl(var(--rb-glass-border) / var(--rb-glass-border-alpha));
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.6) inset,
+      0 18px 50px -18px hsl(var(--rb-shadow) / 0.35);
+  }
+
+  .dark .glass-elevated {
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.1) inset,
+      0 24px 60px -20px hsl(var(--rb-shadow) / 0.8);
+  }
+
+  /* 3D icon tile */
+  .icon-tile {
+    background: linear-gradient(145deg, hsl(var(--rb-glass) / 0.9), hsl(var(--rb-glass) / 0.5));
+    border: 1px solid hsl(var(--rb-glass-border) / 0.8);
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.7) inset,
+      0 6px 14px -6px hsl(var(--rb-shadow) / 0.4);
+  }
+
+  .dark .icon-tile {
+    box-shadow:
+      0 1px 0 0 hsl(var(--rb-glass-highlight) / 0.12) inset,
+      0 8px 18px -8px hsl(var(--rb-shadow) / 0.7);
+  }
+
+  /* 3D button sheen */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.18), transparent 45%);
+    pointer-events: none;
+  }
+
+  .grid-faint {
+    background-image:
+      linear-gradient(hsl(var(--rb-glass-border) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--rb-glass-border) / 0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .text-balance { text-wrap: balance; }
+
+  @keyframes rb-pulse-ring {
+    0% { box-shadow: 0 0 0 0 hsl(var(--rb-critical) / 0.5); }
+    70% { box-shadow: 0 0 0 10px hsl(var(--rb-critical) / 0); }
+    100% { box-shadow: 0 0 0 0 hsl(var(--rb-critical) / 0); }
+  }
+  .pulse-critical { animation: rb-pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+  @keyframes rb-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .blink { animation: rb-blink 1.6s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-critical, .blink { animation: none; }
+  }
+}
